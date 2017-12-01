@@ -1,0 +1,4 @@
+// models
+
+export default {
+}
