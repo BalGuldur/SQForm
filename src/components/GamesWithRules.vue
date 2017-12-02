@@ -1,12 +1,19 @@
 <template>
   <div>
     <div>Правила применения коэффициэнтов</div>
-    <button @click="showCreateRule">Создать правило</button>
+    <button
+      class="toggleCreateRule"
+      @click="showCreateRule">
+      Создать правило
+    </button>
     <GameWithRules
+      class="gameWithRules"
       v-for="game in games"
       :game="game"
       :key="game.id"/>
-    <RuleForm v-model="ruleFormIsOpen"/>
+    <RuleForm
+      class="ruleForm"
+      v-model="ruleFormIsOpen"/>
   </div>
 </template>
 
