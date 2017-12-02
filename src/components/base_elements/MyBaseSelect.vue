@@ -1,8 +1,9 @@
 <template>
-  <select v-model="internalValue">
-    <template v-if="simpleStrings">
+  <select
+    @input="changeValue"
+    :value="value">
+    <template v-if="arrayOfSimpleValues">
       <option
-        class="option"
         v-for="item in items"
         :key="item"
         :value="item">
@@ -11,7 +12,6 @@
     </template>
     <template v-else>
       <option
-        class="option"
         v-for="item in items"
         :key="item[fieldOptionValue]"
         :value="item[fieldOptionValue]">
@@ -40,10 +40,6 @@ export default {
       type: String,
       default: 'title'
     },
-    simpleStrings: {
-      type: Boolean,
-      default: false
-    },
     // Выбранное значение
     value: {
       type: [Number, String],
@@ -51,13 +47,19 @@ export default {
     }
   },
   computed: {
-    internalValue: {
-      get () {
-        return this.value
-      },
-      set (newValue) {
-        this.$emit('input', newValue)
+    // Определение типа переданных item, для генерации option из объектов или просто значений
+    arrayOfSimpleValues () {
+      const firstItem = this.items[Object.keys(this.items || {})[0]]
+      if (typeof firstItem === 'object') {
+        return false
+      } else {
+        return true
       }
+    }
+  },
+  methods: {
+    changeValue (e) {
+      this.$emit('input', e.target.value)
     }
   }
 }
