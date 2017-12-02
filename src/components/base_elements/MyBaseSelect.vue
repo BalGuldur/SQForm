@@ -2,6 +2,7 @@
   <select v-model="internalValue">
     <template v-if="simpleStrings">
       <option
+        class="option"
         v-for="item in items"
         :key="item"
         :value="item">
@@ -10,6 +11,7 @@
     </template>
     <template v-else>
       <option
+        class="option"
         v-for="item in items"
         :key="item[fieldOptionValue]"
         :value="item[fieldOptionValue]">
