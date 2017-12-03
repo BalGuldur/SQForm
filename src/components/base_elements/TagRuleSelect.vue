@@ -1,13 +1,17 @@
 <template>
   <div>
-    <span>{{ title }}</span>
-    <span @click="changeCondition">{{ condition }}</span>
+    <span class="tagTitle">{{ title }}</span>
+    <span
+      class="tagCondition"
+      style="color: blue; text-decoration: underline;"
+      @click="changeCondition">
+      {{ value.condition }}
+    </span>
     <MyBaseSelect
       :items="items"
-      :field-option-title="fieldOptionTitle"
-      :field-option-value="fieldOptionValue"
-      v-model="value"
-      :simple-strings="simpleStrings"/>
+      :value="value.values"
+      @input="changeValues"
+      multi-select/>
   </div>
 </template>
 
@@ -17,40 +21,41 @@ import MyBaseSelect from '@/components/base_elements/MyBaseSelect'
 export default {
   components: { MyBaseSelect },
   props: {
-    items: {
+    value: {
       type: Object,
+      required: true
+    },
+    items: {
+      type: [Object, Array],
       required: true
     },
     title: {
       type: String,
       required: true
     },
-    condition: {
+    tag: {
       type: String,
-      default: '='
-    },
-    fieldOptionTitle: {
-      type: String,
-      default: 'title'
-    },
-    fieldOptionValue: {
-      type: String,
-      default: 'id'
-    },
-    simpleStrings: {
-      type: Boolean,
-      default: false
+      required: true
     }
   },
   methods: {
+    emitNewValue ({condition, values}) {
+      condition = condition || this.value.condition
+      values = values || this.value.values
+      const rule = { condition, values }
+      this.$emit('input', rule)
+    },
     changeCondition () {
-      switch (this.condition) {
+      switch (this.value.condition) {
         case '=':
-          this.condition = '!='
+          this.emitNewValue({condition: '!='})
           break
         case '!=':
-          this.condition = '='
+          this.emitNewValue({condition: '='})
       }
+    },
+    changeValues (newValues) {
+      this.emitNewValue({values: newValues})
     }
   }
 }

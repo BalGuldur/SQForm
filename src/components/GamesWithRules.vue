@@ -11,6 +11,7 @@
       v-for="game in games"
       :game="game"
       :key="game.id"/>
+    <br>
     <RuleForm
       class="ruleForm"
       v-model="ruleFormIsOpen"/>

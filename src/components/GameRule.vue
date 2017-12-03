@@ -1,23 +1,12 @@
 <template>
   <div>
-    <span
-      v-for="geo in rule.geo"
-      :key="geo">
-      {{ geo }}
-    </span>
-    <br>
-    <span
-      v-for="device in rule.devices"
-      :key="device">
-      {{ device }}
-    </span>
-    <br>
-    <span
-      v-for="channel in rule.channels"
-      :key="channel">
-      {{ channel }}
-    </span>
-    <br>
+    <TagRule
+      v-for="tag in ['geo', 'devices', 'channels']"
+      v-if="Object.keys(rule[tag] || {}).length"
+      :key="tag"
+      :title="tag"
+      :condition="rule[tag].condition"
+      :values="rule[tag].values"/>
     <CoefficientTimeRange
       v-for="coefficientTimeRange in ownCoefficientsTimeRanges"
       :key="coefficientTimeRange.id"
@@ -27,12 +16,13 @@
 </template>
 
 <script>
-import CoefficientTimeRange from './CoefficientTimeRange'
+import CoefficientTimeRange from '@/components/base_elements/CoefficientTimeRange'
+import TagRule from '@/components/base_elements/TagRule'
 
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { CoefficientTimeRange },
+  components: { CoefficientTimeRange, TagRule },
   props: {
     rule: {
       type: Object,

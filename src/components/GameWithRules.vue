@@ -1,9 +1,19 @@
 <template>
   <div>
     <div>Действует для {{ game.title }}</div>
-    <button @click="toggleRules">
-      <div v-if="rulesIsOpen">Закрыть правила</div>
-      <div v-else>Открыть правила</div>
+    <button
+      class="toggleRules"
+      @click="toggleRules">
+      <div
+        class="closeRulesTitle"
+        v-if="rulesIsOpen">
+        Закрыть правила
+      </div>
+      <div
+        class="openRulesTitle"
+        v-else>
+        Открыть правила
+      </div>
     </button>
     <template v-if="rulesIsOpen">
       <GameRule

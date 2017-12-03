@@ -1,23 +1,8 @@
+import { rules } from '@/stubs'
+
 const state = {
-  data: {
-    // Stub data, need fetch Action for fetch data from api
-    1: {
-      id: 1,
-      game_id: 1,
-      geo: ['US', 'RU'],
-      devices: ['phone'],
-      channels: ['AppleSource'],
-      rule_to_coefficient_time_range_ids: [1, 2]
-    },
-    2: {
-      id: 2,
-      game_id: 1,
-      geo: ['US'],
-      devices: ['tablet'],
-      channels: ['TopLift'],
-      rule_to_coefficient_time_range_ids: [3]
-    }
-  }
+  // Stub data, need fetch Action for fetch data from api
+  data: rules
 }
 
 const getters = {

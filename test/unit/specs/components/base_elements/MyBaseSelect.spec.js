@@ -1,3 +1,4 @@
+// TODO: Добавить тест на multiselect
 import { shallow } from 'vue-test-utils'
 import MyBaseSelect from '@/components/base_elements/MyBaseSelect'
 const items1 = {1: {id: 1, title: 'test1'}, 2: {id: 2, title: 'test2'}}

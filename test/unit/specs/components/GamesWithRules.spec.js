@@ -1,24 +1,13 @@
 import { mount, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
 import GamesWithRules from '@/components/GamesWithRules'
+import { games } from '@/stubs'
 
-const games = {
-  1: {
-    id: 1,
-    rule_ids: [1, 2],
-    title: 'IceAge'
-  },
-  2: {
-    id: 2,
-    rule_ids: [],
-    title: 'AppJoy'
-  }
-}
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
-describe('GamesWithRules', () => {
+describe('GamesWithRules.vue', () => {
   let getters
   let store
 
