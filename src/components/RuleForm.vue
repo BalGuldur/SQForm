@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="value">
+  v-if="value">
     <div class="ruleForm">Форма создания/редактирования правил</div>
     <GameSelect v-model.number="rule.game_id"/>
     <br>
