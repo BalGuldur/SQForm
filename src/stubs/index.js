@@ -1,12 +1,23 @@
+// Используется в front-end и тестах
+export const geoValues = ['US', 'RU', 'AU']
+
+export const deviceTypeValues = ['phone', 'tablet', 'desktop']
+
+export const channelValues = ['AppleSource', 'TopLift']
+
+export const tags = ['geo', 'devices', 'channels']
+
+// Используется только в тестах
+
 export const coefficientTables = {
   1: {
     id: 1,
-    rule_to_coefficient_time_range_ids: [1, 2],
+    coefficient_time_range_ids: [1, 2],
     title: 'Таблица-1'
   },
   2: {
     id: 2,
-    rule_to_coefficient_time_range_ids: [3],
+    coefficient_time_range_ids: [3],
     title: 'Таблица-2'
   }
 }
@@ -31,7 +42,7 @@ export const rules = {
     geo: { condition: '!=', values: ['US', 'RU'] },
     devices: { condition: '=', values: ['phone'] },
     channels: { condition: '!=', values: ['AppleSource'] },
-    rule_to_coefficient_time_range_ids: [1, 2]
+    coefficient_time_range_ids: [1, 2]
   },
   2: {
     id: 2,
@@ -39,11 +50,11 @@ export const rules = {
     geo: { condition: '=', values: ['US'] },
     devices: { condition: '=', values: ['tablet'] },
     channels: {},
-    rule_to_coefficient_time_range_ids: [3]
+    coefficient_time_range_ids: [3]
   }
 }
 
-export const ruleToCoefficientTimeRanges = {
+export const coefficientTimeRanges = {
   1: {
     id: 1,
     rule_id: 1,
@@ -63,9 +74,3 @@ export const ruleToCoefficientTimeRanges = {
     timeRange: 'stub3'
   }
 }
-
-export const geoValues = ['US', 'RU', 'AU']
-
-export const deviceTypeValues = ['phone', 'tablet', 'desktop']
-
-export const channelValues = ['AppleSource', 'TopLift']

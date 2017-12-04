@@ -1,8 +1,6 @@
-import { ruleToCoefficientTimeRanges } from '@/stubs'
-
 const state = {
   // Stub data, need fetch Action for fetch data from api
-  data: ruleToCoefficientTimeRanges
+  data: {}
 }
 
 const getters = {

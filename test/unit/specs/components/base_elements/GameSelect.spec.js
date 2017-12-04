@@ -10,6 +10,7 @@ localVue.use(Vuex)
 describe('GameSelect.vue', () => {
   let getters
   let store
+  let wrapper
 
   beforeEach(() => {
     getters = {
@@ -19,21 +20,39 @@ describe('GameSelect.vue', () => {
     store = new Vuex.Store({
       getters
     })
-  })
 
-  it('should render select with options', () => {
-    const wrapper = mount(GameSelect, {
+    wrapper = mount(GameSelect, {
       store,
       localVue,
       propsData: {
         value: ''
       }
     })
-    expect(wrapper.find('select')).to.exist
-    expect(wrapper.findAll('option')).to.exist
-    const firstOption = wrapper.findAll('option').at(0)
-    expect(firstOption.text()).to.equal(games[1].title.toString())
-    expect(firstOption.element.value).to.equal(games[1].id.toString())
+  })
+
+  describe('render', () => {
+    it('should have select', () => {
+      wrapper.find('select').element.should.exist
+    })
+    it('should have options', () => {
+      wrapper.find('option').element.should.exist
+    })
+    it('should right option title', () => {
+      const firstOption = wrapper.findAll('option').at(0)
+      firstOption.text().should.be.equal(games[1].title.toString())
+    })
+    it('should right option value', () => {
+      const firstOption = wrapper.findAll('option').at(0)
+      firstOption.element.value.should.be.equal(games[1].id.toString())
+    })
+  })
+
+  describe('user interaction', () => {
+    it('should emit game id on choose game', () => {
+      const firstOption = wrapper.findAll('option').at(0)
+      firstOption.trigger('input')
+      wrapper.emitted().input.should.exist
+    })
   })
 
   it('should emit game id on choose game', () => {
@@ -47,6 +66,6 @@ describe('GameSelect.vue', () => {
     const firstOption = wrapper.findAll('option').at(0)
     firstOption.trigger('input')
     expect(wrapper.emitted().input).to.exist
-    expect(wrapper.emitted().input[0][0]).to.equal(games[1].id.toString())
+    wrapper.emitted().input[0][0].should.be.equal(games[1].id.toString())
   })
 })

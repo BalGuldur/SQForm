@@ -46,6 +46,7 @@ describe('TagRuleSelect.vue', () => {
     })
 
     it('should emit new object on select value', () => {
+      // TODO: Добавить тест emit value при изменении обоих select
     })
   })
 })

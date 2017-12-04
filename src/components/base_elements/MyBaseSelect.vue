@@ -1,5 +1,6 @@
 <template>
   <select
+    ref="select"
     @input="changeValue"
     :value="value"
     :multiple="multiSelect">
@@ -70,15 +71,24 @@ export default {
     }
   },
   methods: {
+    // Изменение значения
     changeValue (e) {
       if (this.multiSelect) {
+        // Если используется multiSelect
+        // Выбираем все id options из HTMLOptions
         const optionsKeys = Object.keys(e.target.options)
           .filter(key => key !== 'length' || key !== 'selectedIndex')
+        // Выбираем все options по id
         const options = optionsKeys.map(key => e.target.options[key])
+        // Фильтруем только выбранные опции
         const choosedOptions = options.filter(option => option.selected)
-        const value = choosedOptions.map(option => option.value)
-        this.$emit('input', value)
+        // Выбираем значения выбранных опций
+        const values = choosedOptions.map(option => option.value)
+        // Эмитим значения выбранных опций
+        this.$emit('input', values)
       } else {
+        // Если не используется multiSelect
+        // Эмитим новое значение
         this.$emit('input', e.target.value)
       }
     }

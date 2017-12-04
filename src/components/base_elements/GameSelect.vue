@@ -13,6 +13,7 @@ import { mapGetters } from 'vuex'
 export default {
   components: { MyBaseSelect },
   props: {
+    // Выбранный id игры, в parent использовать v-model или @input
     value: {
       type: [Number, String],
       required: true
@@ -22,6 +23,7 @@ export default {
     ...mapGetters({games: 'games/data'})
   },
   methods: {
+    // Вызывается при выборе в select, эмитит новое значение в parent
     changeValue (newValue) {
       this.$emit('input', newValue)
     }

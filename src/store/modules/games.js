@@ -1,8 +1,6 @@
-import { games } from '@/stubs'
-
+// TODO: Add test actions
 const state = {
-  // Stub data, need fetch Action for fetch data from api
-  data: games
+  data: {}
 }
 
 const getters = {
@@ -10,6 +8,9 @@ const getters = {
 }
 
 const actions = {
+  fetchGames ({dispatch}) {
+    dispatch('api/fetchModel', { link: '/games' }, { root: true })
+  }
 }
 
 const mutations = {

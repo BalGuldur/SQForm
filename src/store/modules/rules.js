@@ -1,8 +1,6 @@
-import { rules } from '@/stubs'
-
+// TODO: Add test action
 const state = {
-  // Stub data, need fetch Action for fetch data from api
-  data: rules
+  data: {}
 }
 
 const getters = {
@@ -10,6 +8,12 @@ const getters = {
 }
 
 const actions = {
+  fetchRules ({dispatch}) {
+    dispatch('api/fetchModel', { link: '/rules' }, { root: true })
+  },
+  addRule ({dispatch}, item) {
+    dispatch('api/addModelItem', { link: '/rules', item }, { root: true })
+  }
 }
 
 const mutations = {

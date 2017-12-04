@@ -9,51 +9,44 @@ describe('RuleForm.vue', () => {
       stubs: {
         GameSelect: '<div class="gameSelect"></div>',
         TagRuleSelect: '<div class="tagRuleSelect"></div>',
-        CoeffToRuleTimeRangeSelect: '<div class="coeffToRuleTimeRangeSelect"></div>'
+        CoefficientTimeRangeSelect: '<div class="coefficientTimeRangeSelect"></div>'
       },
       propsData: {
         value: true
       }
     })
   })
+  // TODO: Добавить проверку методов, computed и изменения данных
 
   describe('render', () => {
     it('should have game select', () => {
-      expect(wrapper.find('.gameSelect').element).to.exist
+      wrapper.contains('.gameSelect').should.be.ok
     })
-
     it('should have tag rule select', () => {
-      expect(wrapper.find('.tagRuleSelect').element).to.exist
+      wrapper.contains('.tagRuleSelect').should.be.ok
     })
-
     it('should have coeffToRuleTimeRange', () => {
-      expect(wrapper.find('.coeffToRuleTimeRangeSelect').element).to.exist
+      wrapper.contains('.coefficientTimeRangeSelect').should.be.ok
     })
-
     it('should have add coeffToRuleTimeRange button', () => {
-      expect(wrapper.find('.addCoeffToRuleTimeRange').element).to.exist
+      wrapper.contains('.addCoeffTimeRange').should.be.ok
     })
-
     it('should one coeffToRuleTimeRange on initial state', () => {
-      wrapper.findAll('.coeffToRuleTimeRangeSelect').length
+      wrapper.findAll('.coefficientTimeRangeSelect').length
         .should.be.equal(1)
     })
-
     it('should add one coeffToRuleTimeRange on click add', () => {
-      wrapper.find('.addCoeffToRuleTimeRange').trigger('click')
-      wrapper.findAll('.coeffToRuleTimeRangeSelect').length
+      wrapper.find('.addCoeffTimeRange').trigger('click')
+      wrapper.findAll('.coefficientTimeRangeSelect').length
         .should.be.equal(2)
     })
-    // it('should open on change value to true', () => {
-    //   wrapper.setProps({ value: true })
-    //   expect(wrapper.vm.isOpen).to.be.equal(true)
-    //   wrapper.update()
-    //   expect(wrapper.find('.ruleForm').element).to.exist
-    // })
+    it('should open on change value to true', () => {
+      wrapper.contains('.ruleForm').should.be.ok
+    })
 
-    // it('should close on change value to false', () => {
-    //   wrapper.setProps({ value: false })
-    //   expect(wrapper.find('.ruleFrom').element).to.not.exist
-    // })
+    it('should close on change value to false', () => {
+      wrapper.setProps({ value: false })
+      wrapper.contains('.ruleFrom').should.not.be.ok
+    })
   })
 })

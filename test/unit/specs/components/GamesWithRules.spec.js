@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from 'vue-test-utils'
+import { shallow, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
 import GamesWithRules from '@/components/GamesWithRules'
 import { games } from '@/stubs'
@@ -10,6 +10,7 @@ localVue.use(Vuex)
 describe('GamesWithRules.vue', () => {
   let getters
   let store
+  let wrapper
 
   beforeEach(() => {
     getters = {
@@ -19,32 +20,44 @@ describe('GamesWithRules.vue', () => {
     store = new Vuex.Store({
       getters
     })
-  })
 
-  it('should render right content', () => {
-    const wrapper = mount(GamesWithRules, {
+    wrapper = shallow(GamesWithRules, {
       store,
       localVue,
-      propsData: {
-        value: ''
+      stubs: {
+        GameWithRules: '<div class="gameWithRules"></div>',
+        RuleForm: '<div class="ruleForm"></div>'
       }
     })
-    expect(wrapper.find('.toggleCreateRule').element).to.exist
-    expect(wrapper.find('.gameWithRules').element).to.exist
-    expect(wrapper.findAll('.gameWithRules')).to.have.lengthOf(Object.keys(games).length)
-    expect(wrapper.find('.ruleForm').element).to.not.exist
   })
 
-  it('should open create Rule From on click on toggleCreateRule', () => {
-    const wrapper = mount(GamesWithRules, {
-      store,
-      localVue,
-      propsData: {
-        value: ''
-      }
+  describe('render', () => {
+    it('should have toggle create rule form', () => {
+      wrapper.find('.toggleCreateRule').element.should.exist
     })
-    expect(wrapper.findAll('.ruleForm').length).to.be.equal(0)
-    wrapper.find('.toggleCreateRule').trigger('click')
-    expect(wrapper.findAll('.ruleForm').length).to.be.above(0)
+    it('should have game with rules', () => {
+      wrapper.find('.gameWithRules').element.should.exist
+    })
+    it('should have right qty game with rules', () => {
+      wrapper.findAll('.gameWithRules').length
+        .should.equal(Object.keys(games).length)
+    })
+    it('should have rule form', () => {
+      wrapper.find('.ruleForm').element.should.exist
+    })
   })
+
+  describe('initial data', () => {
+    it('should initial closed rule form', () => {
+      wrapper.vm.ruleFormIsOpen.should.be.false
+    })
+  })
+
+  describe('user interability', () => {
+    it('should open create Rule From on click on toggleCreateRule', () => {
+      wrapper.find('.toggleCreateRule').trigger('click')
+      wrapper.vm.ruleFormIsOpen.should.be.true
+    })
+  })
+  // TODO: Добавить тест вызовов beforeMount
 })

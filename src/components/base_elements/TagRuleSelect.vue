@@ -21,30 +21,33 @@ import MyBaseSelect from '@/components/base_elements/MyBaseSelect'
 export default {
   components: { MyBaseSelect },
   props: {
+    // значени в виде {condition: String, values: Array}
+    // при изменении происходит emit('input'), в parent использовать v-model или @input
     value: {
       type: Object,
       required: true
     },
+    // Возможные опции для выбора
     items: {
       type: [Object, Array],
       required: true
     },
+    // Название тэга
     title: {
-      type: String,
-      required: true
-    },
-    tag: {
       type: String,
       required: true
     }
   },
   methods: {
+    // Эмит изменения value в виде {condition: String, values: Array}
     emitNewValue ({condition, values}) {
+      // Если параметр передан то используем его, если нет, то значение из value (исходное)
       condition = condition || this.value.condition
+      // Если параметр передан то используем его, если нет, то значение из value (исходное)
       values = values || this.value.values
-      const rule = { condition, values }
-      this.$emit('input', rule)
+      this.$emit('input', { condition, values })
     },
+    // Переключаем значение condition, вызывая emitNewValue с новым condition
     changeCondition () {
       switch (this.value.condition) {
         case '=':
@@ -54,6 +57,7 @@ export default {
           this.emitNewValue({condition: '='})
       }
     },
+    // Вызываем emitNewValue при изменении выбора в multiSelect
     changeValues (newValues) {
       this.emitNewValue({values: newValues})
     }

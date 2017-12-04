@@ -7,14 +7,11 @@
       Создать правило
     </button>
     <GameWithRules
-      class="gameWithRules"
       v-for="game in games"
       :game="game"
       :key="game.id"/>
     <br>
-    <RuleForm
-      class="ruleForm"
-      v-model="ruleFormIsOpen"/>
+    <RuleForm v-model="ruleFormIsOpen"/>
   </div>
 </template>
 
@@ -22,23 +19,31 @@
 import RuleForm from './RuleForm'
 import GameWithRules from './GameWithRules'
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { RuleForm, GameWithRules },
   data () {
     return {
-      ruleFormIsOpen: false // отображение формы создания/редактирования правил
+      // Управлет отображение формы создания правил
+      ruleFormIsOpen: false
     }
   },
   computed: {
     ...mapGetters({games: 'games/data'})
   },
+  beforeMount () {
+    // Перед mount, получаем от backend игры и правила с дочерними элементами, записываем в state
+    this.fetchGames()
+    this.fetchRules()
+  },
   methods: {
     // открытие формы создания правила
     showCreateRule () {
       this.ruleFormIsOpen = true
-    }
+    },
+    ...mapActions('games', ['fetchGames']),
+    ...mapActions('rules', ['fetchRules'])
   }
 }
 </script>

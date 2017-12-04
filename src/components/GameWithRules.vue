@@ -39,17 +39,21 @@ export default {
   },
   data () {
     return {
+      // Управляет отображением правил коэфф для игры
       rulesIsOpen: false
     }
   },
   computed: {
+    // Возвращает правила, принадлежащие только этой игре - Array
     ownRules () {
+      // Для каждого id возвращаем из state правило с этим id
       return this.game.rule_ids.map(ruleId => this.rules[ruleId])
     },
     ...mapGetters({rules: 'rules/data'})
   },
   methods: {
     toggleRules () {
+      // Переключаем отображение правил коэфф для игры
       this.rulesIsOpen = !this.rulesIsOpen
     }
   }

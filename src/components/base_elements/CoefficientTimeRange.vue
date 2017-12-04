@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>{{ coefficientTable.title }}</span>
+    <span>{{ ownCoefficientTable.title }}</span>
     <span>{{ coefficientTimeRange.timeRange }}</span>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
     }
   },
   computed: {
-    coefficientTable () {
+    // Возвращает таблицу коэффициентов данного coefficient_time_range
+    ownCoefficientTable () {
       return this.coefficientTables[this.coefficientTimeRange.coefficient_table_id]
     },
     ...mapGetters({coefficientTables: 'coefficientTables/data'})

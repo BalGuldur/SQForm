@@ -14,14 +14,17 @@
 <script>
 export default {
   props: {
+    // Наименование тэга
     title: {
       type: String,
       required: true
     },
+    // Условие
     condition: {
       type: String,
       required: true
     },
+    // Значения
     values: {
       type: Array,
       required: true

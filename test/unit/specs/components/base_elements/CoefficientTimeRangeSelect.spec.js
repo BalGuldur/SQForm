@@ -1,13 +1,13 @@
 import { shallow, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
-import CoeffToRuleTimeRangeSelect from '@/components/base_elements/CoeffToRuleTimeRangeSelect'
+import CoefficientTimeRangeSelect from '@/components/base_elements/CoefficientTimeRangeSelect'
 import { coefficientTables } from '@/stubs'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
-describe('CoeffToRuleTimeRangeSelect.vue', () => {
+describe('CoefficientTimeRangeSelect.vue', () => {
   let wrapper
   let getters
   let store
@@ -21,7 +21,7 @@ describe('CoeffToRuleTimeRangeSelect.vue', () => {
       getters
     })
 
-    wrapper = shallow(CoeffToRuleTimeRangeSelect, {
+    wrapper = shallow(CoefficientTimeRangeSelect, {
       store,
       localVue,
       stubs: {

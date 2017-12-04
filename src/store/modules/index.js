@@ -1,12 +1,14 @@
+import api from './api'
 // models
 import games from './games'
 import rules from './rules'
 import coefficientTables from './coefficientTables'
-import ruleToCoefficientTimeRanges from './ruleToCoefficientTimeRanges'
+import coefficientTimeRanges from './coefficientTimeRanges'
 
 export default {
+  api,
   games,
   rules,
   coefficientTables,
-  ruleToCoefficientTimeRanges
+  coefficientTimeRanges
 }

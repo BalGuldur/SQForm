@@ -33,22 +33,25 @@ describe('GameWithRules.vue', () => {
       }
     })
   })
+  // TODO: Добавить проверку computed парамтеров
 
-  it('should render right initial content', () => {
-    expect(wrapper.find('.toggleRules').element).to.exist
-    expect(wrapper.findAll('.gameRule').length).to.equal(0)
-  })
+  describe('render', () => {
+    it('should render right initial content', () => {
+      wrapper.find('.toggleRules').element.should.exist
+      wrapper.findAll('.gameRule').length.should.be.equal(0)
+    })
 
-  it('should render right count rules', () => {
-    wrapper.find('.toggleRules').trigger('click')
-    expect(wrapper.findAll('.gameRule').length).to.equal(2)
-  })
+    it('should render right count rules', () => {
+      wrapper.find('.toggleRules').trigger('click')
+      wrapper.findAll('.gameRule').length.should.be.equal(2)
+    })
 
-  it('should change element toggleRule on toggle', () => {
-    expect(wrapper.contains('.openRulesTitle')).to.be.ok
-    expect(wrapper.contains('.closeRulesTitle')).to.not.be.ok
-    wrapper.find('.toggleRules').trigger('click')
-    expect(wrapper.contains('.openRulesTitle')).to.not.be.ok
-    expect(wrapper.contains('.closeRulesTitle')).to.be.ok
+    it('should change element toggleRule on toggle', () => {
+      wrapper.contains('.openRulesTitle').should.be.ok
+      wrapper.contains('.closeRulesTitle').should.not.be.ok
+      wrapper.find('.toggleRules').trigger('click')
+      wrapper.contains('.openRulesTitle').should.not.be.ok
+      wrapper.contains('.closeRulesTitle').should.be.ok
+    })
   })
 })

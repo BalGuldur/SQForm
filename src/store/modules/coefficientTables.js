@@ -1,8 +1,6 @@
-import { coefficientTables } from '@/stubs'
-
 const state = {
   // Stub data, need fetch Action for fetch data from api
-  data: coefficientTables
+  data: {}
 }
 
 const getters = {

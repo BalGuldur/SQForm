@@ -1,7 +1,7 @@
 import { shallow, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
 import GameRule from '@/components/GameRule'
-import { rules, ruleToCoefficientTimeRanges } from '@/stubs'
+import { rules, coefficientTimeRanges } from '@/stubs'
 
 const rule = rules[1]
 const localVue = createLocalVue()
@@ -15,7 +15,7 @@ describe('GameRule.vue', () => {
 
   beforeEach(() => {
     getters = {
-      'ruleToCoefficientTimeRanges/data': () => ruleToCoefficientTimeRanges
+      'coefficientTimeRanges/data': () => coefficientTimeRanges
     }
 
     store = new Vuex.Store({
@@ -34,14 +34,23 @@ describe('GameRule.vue', () => {
       }
     })
   })
+  // TODO: Добавить тест computed параметров
 
-  it('should render right content', () => {
-    const ruleToCoeffLength = rule.rule_to_coefficient_time_range_ids
-      .map(itemId => ruleToCoefficientTimeRanges[itemId]).length
-
-    wrapper.findAll('.tagRule').length
-      .should.be.equal(3)
-    wrapper.findAll('.coeffTimeRange').length
-      .should.be.equal(ruleToCoeffLength)
+  describe('render', () => {
+    it('should have tag rule', () => {
+      wrapper.find('.tagRule').element.should.exist
+    })
+    it('should have right qty tag rule', () => {
+      wrapper.findAll('.tagRule').length.should.be.equal(3)
+    })
+    it('should have coefficient Time Range', () => {
+      wrapper.find('.coeffTimeRange').element.should.exist
+    })
+    it('should have right qty Time Range', () => {
+      const coeffTimeRangesLength = rule.coefficient_time_range_ids
+        .map(itemId => coefficientTimeRanges[itemId]).length
+      wrapper.findAll('.coeffTimeRange').length
+        .should.be.equal(coeffTimeRangesLength)
+    })
   })
 })
